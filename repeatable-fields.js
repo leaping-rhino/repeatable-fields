@@ -76,11 +76,14 @@
 
 					var row = $(this).parents(settings.row).first();
 
+					var do_remove = true;
 					if(typeof settings.before_remove === 'function') {
-						settings.before_remove(container, row);
+						do_remove = settings.before_remove(container, row);
 					}
 
-					row.remove();
+					if (do_remove) {
+						row.remove();
+					}
 
 					if(typeof settings.after_remove === 'function') {
 						settings.after_remove(container);
