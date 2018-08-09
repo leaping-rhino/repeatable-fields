@@ -105,10 +105,15 @@
 
 			row_count++;
 
-			$('*', new_row).each(function() {
-				$.each(this.attributes, function(index, element) {
+			var init_row_function = function(index, element) {
+				$.each(element.attributes, function() {
 					this.value = this.value.replace(settings.row_count_placeholder, row_count - 1);
-				});
+				})
+			}
+
+			init_row_function(0, new_row[0]);
+			$('*', new_row).each(function(index, element) {
+				init_row_function(index, this);
 			});
 
 			$(container).attr('data-rf-row-count', row_count);
